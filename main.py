@@ -1,21 +1,40 @@
 
-class Test():
+class Car:
+    def __init__(self, make, model):
+        self.public_make = make # Открытый атрибут
+        self._protected_model = model # Защищенный атрибут
+        self.__private_year = 2022 # Приватный атрибут
 
-    def __init__(self):
-        self.public = "публичный атрибут"
-        self._protected = "защищенный атрибут"
-        self.__private = "приватный атрибут"
+    def public_method(self):
+        return f"Это открытый метод. Машина: {self.public_make} {self._protected_model}."
 
-    def get_private(self):
-        return self.__private
+    def _protected_method(self):
+        return "Это защищенный метод."
 
-    def set_private(self, value):
-        self.__private = value
+    def __private_method(self):
+        return "Это приватный метод."
 
 
-test = Test()
-print(test.public)
+class ElectricCar(Car):
+    def __init__(self, make, model, battery_size):
+        super().__init__(make, model)
+        self.battery_size = battery_size
 
-print(test._protected)
+    def get_details(self):
+        # Можно обратиться к открытому и защищенному атрибуту, но не к приватному
+        details = f"{self.public_make} {self._protected_model}, Батарея: {self.battery_size} kWh."
+        # Нельзя напрямую обратиться к __private_method и __private_year
+        return details
 
-print(test.get_private())
+# Создание экземпляра ElectricCar
+tesla = ElectricCar('Tesla', 'Model S', '100')
+
+# Доступ к открытому атрибуту и методу:
+print(tesla.public_make)
+print(tesla.public_method())
+
+# Доступ к защищённому атрибуту (не рекомендуется, но возможно):
+print(tesla._protected_model)
+print(tesla._protected_method())
+
+print(tesla._Car__private_year)
