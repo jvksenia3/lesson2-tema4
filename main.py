@@ -1,6 +1,7 @@
 
 class Test():
-    def __int__(self):
+
+    def __init__(self):
         self.public = "публичный атрибут"
         self._protected = "защищенный атрибут"
         self.__private = "приватный атрибут"
@@ -13,7 +14,6 @@ class Test():
 
 
 test = Test()
-
 print(test.public)
 
 print(test._protected)
